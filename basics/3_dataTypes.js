@@ -158,3 +158,4 @@ console.log(userId.toUpperCase())
 console.log(userId.indexOf('a'))
 console.log(userId.substring(2,10))
 console.log(userId.slice(-10,18))
+
