@@ -84,15 +84,3 @@ if(true)
 }
 // console.log(name); // error (out of scope)
 
-const user = {
-    name:"kanchan",
-    age:21,
-    message: function(){
-        console.log(`hello ${this.name}.`);
-    }
-}
-// user.message() // hello kanchan
-user.name="shradha" // this => name = shradha
-// user.message() // hello shradha
-
-// console.log(this); // empty object {} as it is referring to a global object
