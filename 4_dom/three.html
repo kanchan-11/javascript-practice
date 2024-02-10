@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM | PRACTICE</title>
+</head>
+<body style="background-color: #212121; color:#fff">
+    
+</body>
+<script>
+
+
+    /*create an element div*/
+    const div = document.createElement('div') 
+    console.log(div);
+
+    div.className="main"  // give class to element
+    div.id=Math.round(Math.random()*10 +1) // give random id to element
+    div.setAttribute("title","My Title") // add attribute title with value My Title
+    div.style.backgroundColor='green' 
+    div.style.padding="10px"
+
+    /*text can be added to the div like this directly but not an optimized apporach*/
+    // div.innerText = "Dom practice sample" 
+
+    /*optimized approach of adding text to element is by creating a Node*/
+    const txt = document.createTextNode("Dom practice Sample")
+
+    /*append this node to its parent (div element)*/
+    div.append(txt)
+
+    /* append the div element to its parent(body) then only it will be visible 
+    otherwise it is just created in memory and not rendered on the file page*/
+    document.body.append(div)
+</script>
+</html>
