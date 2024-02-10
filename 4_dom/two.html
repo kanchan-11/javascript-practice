@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM | PRACTICE</title>
 </head>
-<body style="background-color: 212121" color:#fff>
+<body style="background-color: #212121; color:#fff">
     <div class="parent">
         <div class="day">Monday</div>
         <div class="day">Tuesday</div>
@@ -14,4 +14,35 @@
         <div class="day">Thursday</div>
     </div>
 </body>
+<script>
+    const parent = document.querySelector('.parent')
+    // console.log(parent);
+    // console.log(parent.children); // returns a HTML Collection
+    // console.log(parent.children[0].innerHTML);
+
+    /* parent.children returns a nodelist of all children of that element*/
+    for (let i = 0; i < parent.children.length; i++) {
+        // console.log(parent.children[i].innerHTML);
+    }
+    parent.children[1].style.color = "orange"
+    
+    /* firstElementChild returns the first child of that element*/
+    console.log(parent.firstElementChild);
+
+    /* lastElementChild returns the last child of that element*/
+    console.log(parent.lastElementChild);
+
+    const dayOne = document.querySelector('.day')
+    console.log(dayOne)
+
+    /* parentElement returns the parent of that element in which it was created*/
+    console.log(dayOne.parentElement);
+
+    /* nextElementSibling returns the sibling of that element,
+         i.e, other child of the parent of this element*/
+    console.log(dayOne.nextElementSibling);
+
+    /* childNodes return the NodeList of all children of the element*/
+    console.log("Nodes: ",parent.childNodes);
+</script>
 </html>
