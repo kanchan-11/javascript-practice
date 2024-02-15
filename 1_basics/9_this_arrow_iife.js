@@ -61,7 +61,7 @@ arr = [1,8,3,45,6,7]
 //----------------------------------iife-------------------------------------------------------
 //----------------------------immediately invoked function expressions-------------------------
 // to remove the problem from global scope execution 
-// for creating multiple iife mandatory to seperate by ; otherwise error
+// for creating multiple iifel mandatory to seperate by ; otherwise error
 const helper1 = function(){
     console.log("hello1");
 }
