@@ -1,0 +1,35 @@
+html {
+    font-family: sans-serif;
+  }
+  body {
+    height:500px;
+    min-height: 100vh;
+    background-color: #212121;
+    color:#fff;
+  }
+  .button {
+    background-color: #161616;
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 20px;
+    border-style: none;
+  }
+  #wrapper {
+    box-sizing: border-box;
+    text-align: center;
+    padding:10px;
+    background-color: #474747;
+    color: #fff;
+    font-size: 25px;
+  }
+  h1 {
+    background-color: #161616;
+    padding:10px;
+    color: #fff;
+    text-align: center;
+  }
+  p {
+    font-size: 16px;
+    text-align: center;
+    padding: 10px
+  }
