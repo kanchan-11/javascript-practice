@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html events</title>
+</head>
+<body>
+    <h2>Amazing images</h2>
+    <div>
+        <ul id="images">
+            <li>
+                <img height="200px" width="200px" id="mountain" alt="mountain" 
+                    src="./images/mountian.jpg">
+            </li>
+            <li>
+                <img height="200px" width="200px" id="couple" alt="couple"
+                    src="./images/couple.jpg">
+            </li>
+            <li>
+                <img height="200px" width="200px" id="sea"  alt="sea"
+                    src="./images/sea.jpg">
+            </li>
+            <li>
+                <img height="200px" width="200px" id="lamp" alt="lamp"
+                    src="./images/lamp.jpg">
+            </li>
+            <li>
+                <img height="200px" width="200px" id="candle" alt="candle"
+                    src="./images/candle.jpg">
+            </li>
+            <li>
+                <a id="google" href="https://www.google.com/">google</a>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+
+    /* Method 1 => not very effective--------------------------------------------------------------*/ 
+    // document.getElementById('sea').onclick = function() {
+        // alert('sea image1')
+    // }
+
+    /* Method 2 => mostly used way-----------------------------------------------------------------*/
+    // document.getElementById('sea').addEventListener('click',function(){
+    //     alert('sea image2')
+    // },false)
+
+    /* other methods: (not popular now were earliear used)-----------------------------------------*/
+    //attachEvent
+    //jQuery
+
+    /* addEventListner provides a paramter which contains various features which are higly useful
+        onClick provides very less number of features thus, not used much--------------------------*/
+    // document.getElementById('sea').addEventListener('click',function(e){
+    //     alert('sea image2')
+    //     console.log(e);
+    // },false)
+
+    /* important elements to study:----------------------------------------------------------------*/
+    // type, timestamp, defaultPrevented
+    // target, toElement, srcElement, currentTarget 
+    // clientX, clientY, screenX, screenY
+    // altKey, ctrlKey, shiftKey, keyCode 
+
+    /* Event propoagation:-------------------------------------------------------------------------*/
+    // event bubbling -> goes from bottom to top like from moutnain to ul
+    // event capturing -> goes from top to bottom like form ul to mountain
+    
+    /* The one which is set to true is considered first---------------------------------------------- 
+    if both are true -> outer element(parent) is considered first (event capturing)------------------
+    if both are false -> inner element(child) is considered first (event bubbling)------------------*/
+
+    // document.getElementById('mountain').addEventListener('click',function(e){
+    //     console.log('clicked inside mountain');
+    // },true) 
+    
+    // document.getElementById('images').addEventListener('click',function(e){
+    //     console.log('clicked inside the ul');
+    // },true)
+
+    /* stopPropogation() => to stop further propogation to events inwards or outwards direction-------
+    to stop event propogation to outer bubble add stopPropogation() to inner event ------------------*/
+    // document.getElementById('mountain').addEventListener('click',function(e){
+    //     console.log('clicked inside mountain');
+    //     e.stopPropagation()
+    // },false) 
+    
+    // document.getElementById('images').addEventListener('click',function(e){
+    //     console.log('clicked inside the ul');
+    // },false)
+
+    /* to stop event propogation to inner bubble add stopPropogation() to outer event -------------*/
+    // document.getElementById('mountain').addEventListener('click',function(e){
+    //     console.log('clicked inside mountain');
+    // },true) 
+    
+    // document.getElementById('images').addEventListener('click',function(e){
+    //     console.log('clicked inside the ul');
+    //     e.stopPropagation()
+    // },true)
+
+    /* preventDefault => to stop the default action of that event ---------------------------------*/
+    // document.getElementById("google").addEventListener('click',function(e) {
+    //     e.preventDefault()
+    //     console.log("google link clicked");
+    // },false)
+
+    /* trying to remove the images on clicking them -----------------------------------------------*/
+    document.getElementById('images').addEventListener('click', function(e){
+        let delNode = e.target.parentNode
+        console.log(e.target.tagName); //returns IMG for images and LI for google
+        if(e.target.tagName==='IMG') // to remove only images 
+        // delNode.remove()
+        delNode.parentNode.removeChild(delNode)
+    },false)
+
+
+
+</script>
+</html>
