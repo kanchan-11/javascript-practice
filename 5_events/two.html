@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Javascript Practice</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+
+    /* do the given operations after given amount of time only once */
+    // setTimeout(() => {
+    //     console.log("kanchan")
+    // }, 4000);
+    
+    /* do the given operations after given amount of time repeatedly with an interval given */
+    // setInterval(() => {
+    //     console.log("javascript");
+    // }, 2000);
+
+    /* we can also pass a reference of some function in place of call back */
+    // function print(){
+    //     console.log("kanchan");
+    // }
+    // setTimeout(print, 2000);
+
+    /* changing the h1 element content after a particular time */
+    function change(){
+        document.querySelector("h1").innerHTML="Kanchan Agarwal"
+    }
+    setTimeout(change, 4000);
+
+    /* clearTimeout -> to stop setTimeout */
+    const timeOut = setTimeout(change, 4000);
+    // clearTimeout(timeOut)
+    document.querySelector('#stop').addEventListener('click',function() {
+        clearTimeout(timeOut)
+        console.log("Stopped");
+    })
+</script>
+</html>
