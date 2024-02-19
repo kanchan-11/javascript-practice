@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121;">
+    <button id="orange">Orange</button>
+    <button id="green">Green</button>
+</body>
+<script>
+    // closure => the inner function gets the variables of the outer function but not vice versa
+    
+    // function outer(){
+    //     let outername = "kanchan"
+    //     let name ="outername"
+    //     // console.log("OUTER",innername); // innername from inside cannot be accessed by outer function
+    //     function inner(){
+    //         let innername = "shradha"
+    //         let name="innername"
+    //         console.log("INNER",outername); // inner function accesses the variable from outer function 
+    //         console.log("INNER", name); /* since both the variables in outer function 
+    //         and inner function have same name the inner function variable overrides the outer one*/
+    //     }
+    //     inner()
+    // }
+    // outer()
+    // console.log("TOO OUTER",outername);
+
+    /* lexical scoping
+       when an inner function is returned by outer function then 
+       not only the inner function is returned but the complete scope of outer function is also returned
+       this is call lexical scoping*/
+    // function makeFun(){
+    //     const name = "name from outer makeFun"
+    //     function displayName(){ // this is declared inside makeFun but not executed inside it
+    //         console.log("Inner displayName",name);
+    //     }
+    //     return displayName
+    // }
+    // const myFun = makeFun() // it returns displayName()
+    // myFun() // displayName() gets executed
+</script>
+<script>
+    // to change the color of background on click of the button--------------------------------------
+
+    // method 1------------------------------------------------
+
+    // document.getElementById('orange').addEventListener('click',()=>{
+    //     document.querySelector('body').style.backgroundColor=`orange`
+    // })
+    // document.getElementById('green').addEventListener('click',()=>{
+    //     document.querySelector('body').style.backgroundColor=`green`
+    // })
+
+    //method 2-------------------------------------------------
+
+    // document.getElementById('orange').onclick = function(){
+    //     document.body.style.backgroundColor = `orange`
+    // }
+    // document.getElementById('green').onclick = function(){
+    //     document.body.style.backgroundColor = `green`
+    // }
+
+    //method 3-------------------------------------------------
+
+    // this method does not works properly as the clickhandler() gets executed automatically 
+    // function clickHandler(color){
+    //     document.body.style.backgroundColor = `${color}`
+    // }
+    // document.getElementById('orange').onclick = clickHandler('orange')
+    // document.getElementById('green').onclick = clickHandler('green')
+
+    // method 4 (best => using lexical scoping and closure)-----
+    // this is the correct implementation of method 3
+    function clickHandler(color){
+        return function(){
+            document.body.style.backgroundColor = `${color}`
+        }
+
+    }
+    document.getElementById('orange').onclick = clickHandler('orange')
+    document.getElementById('green').onclick = clickHandler('green')
+
+</script>
+</html>
