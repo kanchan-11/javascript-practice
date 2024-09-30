@@ -1,0 +1,177 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let quantity = 0;
+        showQuantity = () => console.log(`Cart Quantiy: ${quantity}`)
+        increaseQuantity = () => {
+            quantity++;
+            showQuantity();
+        }
+        increaseQuantityBy2 = () => {
+            quantity += 2;
+            showQuantity();
+        }
+        increaseQuantityBy3 = () => {
+            quantity += 3;
+            showQuantity();
+        }
+        resetQuantity = () => {
+            quantity = 0;
+            showQuantity();
+        }
+
+        // ----------------------------Rock paper scissors--------------------------------------------------
+        let myNum = 0;
+        let computerNum = 0;
+        const numbers = [1, 2, 3];
+
+        let isAutoPlay = false;
+        let autoPlayInterval;
+
+
+        const autoPlay = () => {
+            isAutoPlay = !isAutoPlay
+            if (isAutoPlay) {
+                document.querySelector('.autoPlay').innerText = "Stop Autoplay";
+                autoPlayInterval = setInterval(() => {
+                    const randomChoice = numbers[Math.floor(Math.random() * 3)]; // Randomly choose rock, paper, or scissors
+                    if (randomChoice === 1) chooseRock();
+                    if (randomChoice === 2) choosePaper();
+                    if (randomChoice === 3) chooseScissors();
+                }, 1000);
+
+            } else {
+                clearInterval(autoPlayInterval);
+                document.querySelector('.autoPlay').innerText = "Start Autoplay";
+            }
+        }
+        chooseRock = () => {
+            myNum = 1;
+            computerNum = numbers[Math.floor(Math.random() * numbers.length)];
+            checkWin();
+        }
+        choosePaper = () => {
+            myNum = 2;
+            computerNum = numbers[Math.floor(Math.random() * numbers.length)];
+            checkWin();
+        }
+        chooseScissors = () => {
+            myNum = 3;
+            computerNum = numbers[Math.floor(Math.random() * numbers.length)];
+            checkWin();
+        }
+
+        let score = JSON.parse(localStorage.getItem("score")) || {
+            win: 0,
+            loose: 0,
+            tie: 0,
+        };
+
+        const updateScore = () => {
+            localStorage.setItem("score", JSON.stringify(score))
+            document.querySelector('.p_win_loose_tie').innerText = `Win: ${score.win} Loose: ${score.loose} Tie: ${score.tie}`
+        };
+
+        checkWin = () => {
+            if (myNum == 1 && computerNum == 2) {
+                score.loose++;
+                document.querySelector('.p_result').innerText = "You loose!";
+                document.querySelector('.p_moves').innerText = ("You: rock Computer: paper");
+            }
+            else if (myNum == 2 && computerNum == 3) {
+                score.loose++;
+                document.querySelector('.p_result').innerText = "You loose!";
+                document.querySelector('.p_moves').innerText = ("You: paper Computer: scissors");
+            }
+            else if (myNum == 3 && computerNum == 1) {
+                score.loose++;
+                document.querySelector('.p_result').innerText = "You loose!";
+
+            }
+            else if (myNum == 1 && computerNum == 1) {
+                score.tie++;
+                document.querySelector('.p_result').innerText = "Tie!";
+                document.querySelector('.p_moves').innerText = ("You: rock Computer: rock");
+            }
+            else if (myNum == 2 && computerNum == 2) {
+                score.tie++;
+                document.querySelector('.p_result').innerText = "Tie!";
+                document.querySelector('.p_moves').innerText = ("You: paper Computer: paper");
+            }
+            else if (myNum == 3 && computerNum == 3) {
+                score.tie++;
+                document.querySelector('.p_result').innerText = "Tie!";
+                document.querySelector('.p_moves').innerText = ("You: scissors Computer: scissors");
+            }
+            else if (myNum == 1 && computerNum == 3) {
+                score.win++;
+                document.querySelector('.p_result').innerText = "You win!";
+                document.querySelector('.p_moves').innerText = ("You: rock Computer: scissors");
+            }
+            else if (myNum == 2 && computerNum == 1) {
+                score.win++;
+                document.querySelector('.p_result').innerText = "You win!";
+                document.querySelector('.p_moves').innerText = ("You: paper Computer: rock");
+            }
+            else if (myNum == 3 && computerNum == 2) {
+                score.win++;
+                document.querySelector('.p_result').innerText = "You win!";
+                document.querySelector('.p_moves').innerText = ("You: scissors Computer: paper");
+            }
+            updateScore()
+        }
+        resetScore = () => {
+            score.loose = 0;
+            score.tie = 0;
+            score.win = 0;
+            document.querySelector(".p_moves").innerHTML = ''
+            document.querySelector(".p_result").innerHTML = ''
+
+            updateScore();
+        }
+        viewScore = () => console.log(JSON.parse(localStorage.getItem("score")))
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.addEventListener('keydown', (event) => {
+                if (event.key === 'r') {
+                    chooseRock();
+                } else if (event.key === 'p') {
+                    choosePaper();
+                } else if (event.key === 's') {
+                    chooseScissors();
+                }
+            });
+        });
+        
+    </script>
+</head>
+
+<body>
+    <div>
+        <p>Cart Quantity</p>
+        <button onclick="showQuantity()">Show Quantity</button>
+        <button onclick="increaseQuantity()">Add to Cart</button>
+        <button onclick="increaseQuantityBy2()">+2</button>
+        <button onclick="increaseQuantityBy3()">+3</button>
+        <button onclick="resetQuantity()">Reset Cart</button>
+    </div>
+    <div>
+        <p>Pock Paper Scissors</p>
+        <button onclick="chooseRock()">Rock</button>
+        <button onclick="choosePaper()">Paper</button>
+        <button onclick="chooseScissors()">Scissors</button>
+        <p class="p_result"></p>
+        <p class="p_moves"></p>
+        <p class="p_win_loose_tie"></p>
+        <button onclick="resetScore()">Reset Score</button>
+        
+        <button class="autoPlay" onClick="autoPlay()">Start Autoplay</button>
+    </div>
+
+</body>
+
+</html>
