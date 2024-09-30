@@ -1,0 +1,177 @@
+<html lang="en">
+
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Value</th>
+            <th>State</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>UNSENT</td>
+            <td>Client has been created. open() not called yet</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>OPENED</td>
+            <td>open() has been called</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>HEADERS_RECEIVED</td>
+            <td>send() has been called, and headers and status are available</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>LOADING</td>
+            <td>Downloading; responseText holds partial data</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>DONE</td>
+            <td>The operation is complete</td>
+        </tr>
+    </table>
+</body>
+<script>
+
+    const requestUrl = "https://api.github.com/users/kanchan-11"
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', requestUrl)
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState);
+        if (xhr.readyState === 4) {
+            const data = JSON.parse(this.responseText)
+            console.log(data.avatar_url);
+        }
+    }
+    xhr.send()
+
+
+
+    // callback hell------------------------------------------------------------------------
+    // function getData(dataId, getNextData) {
+    //     setTimeout(() => {
+    //         console.log("data", dataId);
+    //         if (getNextData) {
+    //             getNextData();
+    //         }
+    //     }, 2000);
+    // }
+    // console.log("fetching data1");
+    // getData(1, () => {
+    //     console.log("fetching data2");
+    //     getData(2, () => {
+    //         console.log("fetching data3");
+    //         getData(3, () => {
+    //             console.log("fetching data4");
+    //             getData(4);
+    //         })
+    //     })
+    // })
+
+
+    // promise creation---------------------------------------------------
+    // function getData(dataId, getNextData) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             console.log("data", dataId);
+    //             if (getNextData) {
+    //                 getNextData();
+    //             }
+    //         }, 2000);
+    //     });
+    // }
+
+    // const getPromise = (num)=>{
+    //     return new Promise((resolve,reject)=>{
+    //         console.log("I am a promise");
+    //         if(num>10)
+    //         reject(`eror ${num}`);
+    //         else
+    //         resolve("success");
+    //     })
+    // }
+
+    // let promise = getPromise(30);
+
+    //promise handling as most of the times we will be only handling the promises recieved from an API-------------
+    // promise.then((result)=>{
+    //     console.log(`promise recieved ${result}`);
+    // });
+    // promise.catch((error)=>{
+    //     console.log(`promise not recieved ${error}`)
+    // });
+
+    //promise chaining-------------------------------------------------------------------------------
+    // const asyncFun =() => {
+    //     return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         console.log("Data");
+    //         resolve("success");
+    //     }, 2000);
+        
+    // });}
+
+    // console.log("fetching data1");
+    // asyncFun().then((result) => {
+    //     console.log("fetching data2");
+    //     return asyncFun().then((result) => {
+    //         console.log("fetching data3");
+    //         return asyncFun().then((result) => {
+    //             console.log("fetching data4");
+    //             return asyncFun((result) => {
+    //             });
+    //         });
+    //     });
+    // });
+
+
+    //aync- await----------------------------------------------------------------------------------
+
+    function api(){
+        return new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                console.log("Data");
+                resolve(200);
+            },2000);
+        });
+    }
+
+    // async function getData() {
+    //     console.log("fetching data1");
+    //     await api();
+    //     console.log("fetching data2");
+    //     await api();
+    //     console.log("fetching data3");
+    //     await api();
+    //     console.log("fetching data4");
+    //     await api();
+    // }
+    // getData() // extra exclusive call has to be made to the aync function
+
+
+    // IIFE-----------------------------------------------------------------------------------
+    (async function(){
+        console.log("fetching data1");
+        await api();
+        console.log("fetching data2");
+        await api();
+        console.log("fetching data3");
+        await api();
+        console.log("fetching data4");
+        await api();
+    })();
+</script>
+
+</html>
